@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SatFinderPro</string>
+    
+    <!-- Authentication -->
+    <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="name">Name</string>
+    <string name="logout">Logout</string>
+    <string name="invalid_email">Invalid email format</string>
+    <string name="password_too_short">Password must be at least 6 characters</string>
+    <string name="passwords_not_match">Passwords do not match</string>
+    <string name="account_created">Account created successfully</string>
+    <string name="login_failed">Login failed. Please check your credentials</string>
+    <string name="user_not_found">User not found</string>
+    <string name="email_already_exists">Email already exists</string>
+    
+    <!-- Main Screen -->
+    <string name="select_satellite">Select Satellite</string>
+    <string name="current_location">Current Location</string>
+    <string name="azimuth">Azimuth</string>
+    <string name="elevation">Elevation</string>
+    <string name="polarization">Polarization (Skew)</string>
+    <string name="signal_quality">Signal Quality</string>
+    <string name="aligned">Satellite Aligned!</string>
+    <string name="not_aligned">Align the antenna</string>
+    <string name="history">History</string>
+    <string name="getting_location">Getting location...</string>
+    <string name="location_error">Unable to get location</string>
+    
+    <!-- Satellites -->
+    <string name="nilesat">Nilesat (7°W)</string>
+    <string name="astra">Astra (19.2°E)</string>
+    <string name="eutelsat">Eutelsat (7°E)</string>
+    
+    <!-- History -->
+    <string name="no_history">No alignment history</string>
+    <string name="delete">Delete</string>
+    <string name="confirm_delete">Are you sure you want to delete this record?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    
+    <!-- Permissions -->
+    <string name="location_permission_required">Location permission is required to use this app</string>
+    <string name="grant_permission">Grant Permission</string>
+</resources>
