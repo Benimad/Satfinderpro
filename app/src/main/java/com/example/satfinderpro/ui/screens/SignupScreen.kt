@@ -21,6 +21,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -66,14 +67,24 @@ fun SignupScreen(
             .fillMaxSize()
             .background(
                 Brush.verticalGradient(
-                    colors = listOf(
-                        DarkScannerBackground,
-                        DarkScannerSurface,
-                        DarkScannerBackground
-                    )
+                    colors = BackgroundGradient
                 )
             )
     ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    Brush.radialGradient(
+                        colors = listOf(
+                            Secondary.copy(alpha = 0.12f),
+                            Color.Transparent
+                        ),
+                        center = Offset(0.5f, 0.3f),
+                        radius = 1.2f
+                    )
+                )
+        )
         // Animated background elements
         Box(
             modifier = Modifier
@@ -147,17 +158,20 @@ fun SignupScreen(
             
             Text(
                 text = "Create Account",
-                fontSize = 28.sp,
-                fontWeight = FontWeight.Bold,
+                fontSize = 32.sp,
+                fontWeight = FontWeight.ExtraBold,
                 color = Color.White,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                letterSpacing = 1.sp
             )
             
             Text(
-                text = "Join SatFinderPro today",
-                fontSize = 14.sp,
-                color = ScannerTextMuted,
-                textAlign = TextAlign.Center
+                text = "JOIN THE PREMIUM EXPERIENCE",
+                fontSize = 12.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = Secondary,
+                textAlign = TextAlign.Center,
+                letterSpacing = 2.sp
             )
             
             Spacer(modifier = Modifier.height(24.dp))
@@ -378,51 +392,67 @@ fun SignupScreen(
                     Spacer(modifier = Modifier.height(16.dp))
                     
                     // Sign Up Button
-                    Button(
-                        onClick = {
-                            var isValid = true
-                            if (name.isBlank()) {
-                                nameError = "Name is required"
-                                isValid = false
-                            }
-                            if (email.isEmpty() || !email.contains("@")) {
-                                emailError = "Please enter a valid email"
-                                isValid = false
-                            }
-                            if (password.length < 6) {
-                                passwordError = "Password must be at least 6 characters"
-                                isValid = false
-                            }
-                            if (password != confirmPassword) {
-                                confirmPasswordError = "Passwords do not match"
-                                isValid = false
-                            }
-                            if (isValid) {
-                                viewModel.register(name, email, password)
-                            }
-                        },
+                    Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(52.dp),
-                        enabled = authState !is AuthState.Loading,
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Secondary,
-                            disabledContainerColor = Secondary.copy(alpha = 0.5f)
-                        ),
-                        shape = RoundedCornerShape(12.dp)
+                            .height(56.dp)
+                            .clip(RoundedCornerShape(14.dp))
+                            .background(
+                                Brush.horizontalGradient(
+                                    colors = SecondaryGradient
+                                )
+                            )
                     ) {
-                        if (authState is AuthState.Loading) {
-                            CircularProgressIndicator(
-                                modifier = Modifier.size(24.dp),
-                                color = Color.White,
-                                strokeWidth = 2.dp
+                        Button(
+                            onClick = {
+                                var isValid = true
+                                if (name.isBlank()) {
+                                    nameError = "Name is required"
+                                    isValid = false
+                                }
+                                if (email.isEmpty() || !email.contains("@")) {
+                                    emailError = "Please enter a valid email"
+                                    isValid = false
+                                }
+                                if (password.length < 6) {
+                                    passwordError = "Password must be at least 6 characters"
+                                    isValid = false
+                                }
+                                if (password != confirmPassword) {
+                                    confirmPasswordError = "Passwords do not match"
+                                    isValid = false
+                                }
+                                if (isValid) {
+                                    viewModel.register(name, email, password)
+                                }
+                            },
+                            modifier = Modifier.fillMaxSize(),
+                            enabled = authState !is AuthState.Loading,
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Transparent,
+                                disabledContainerColor = Color.Transparent
+                            ),
+                            shape = RoundedCornerShape(14.dp),
+                            elevation = ButtonDefaults.buttonElevation(
+                                defaultElevation = 0.dp,
+                                pressedElevation = 0.dp,
+                                disabledElevation = 0.dp
                             )
-                        } else {
-                            Text(
-                                text = "CREATE ACCOUNT",
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Bold
-                            )
+                        ) {
+                            if (authState is AuthState.Loading) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(26.dp),
+                                    color = Color.White,
+                                    strokeWidth = 3.dp
+                                )
+                            } else {
+                                Text(
+                                    text = "CREATE ACCOUNT",
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight.ExtraBold,
+                                    letterSpacing = 1.5.sp
+                                )
+                            }
                         }
                     }
                 }

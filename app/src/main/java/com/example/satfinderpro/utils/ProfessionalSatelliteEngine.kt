@@ -97,7 +97,7 @@ object ProfessionalSatelliteEngine {
             signalDelay = signalDelay,
             freeSpacePathLoss = freeSpacePathLoss,
             predictedSignalQuality = predictedSignalQuality,
-            optimalAlignmentTime = calculateOptimalAlignmentWindow(userLat, userLon, satLon),
+            optimalAlignmentTime = calculateOptimalAlignmentWindow(azimuth),
             lookAngleCone = calculateLookAngleCone(azimuth, elevation)
         )
     }
@@ -238,10 +238,7 @@ object ProfessionalSatelliteEngine {
     /**
      * Calculate optimal alignment window based on sun position
      */
-    private fun calculateOptimalAlignmentWindow(lat: Double, lon: Double, satLon: Double): AlignmentWindow {
-        val satPosition = calculateProfessionalPosition(lat, lon, satLon)
-        val azimuth = satPosition.azimuth
-        
+    private fun calculateOptimalAlignmentWindow(azimuth: Double): AlignmentWindow {
         return when {
             azimuth in 45.0..135.0 -> AlignmentWindow(
                 "Morning (6AM - 12PM)",

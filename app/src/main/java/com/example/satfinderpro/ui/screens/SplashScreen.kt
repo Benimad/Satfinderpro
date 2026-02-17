@@ -83,17 +83,29 @@ fun SplashScreen(onSplashFinished: () -> Unit) {
         modifier = Modifier
             .fillMaxSize()
             .background(
-                Brush.radialGradient(
-                    colors = listOf(
-                        DarkScannerSurface,
-                        DarkScannerBackground,
-                        Color(0xFF050810)
-                    ),
-                    center = Offset(0.5f, 0.4f),
-                    radius = 1.5f
+                Brush.verticalGradient(
+                    colors = BackgroundGradient + Color(0xFF0A0D18),
+                    startY = 0f,
+                    endY = Float.POSITIVE_INFINITY
                 )
             )
     ) {
+        // Radial gradient overlay
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    Brush.radialGradient(
+                        colors = listOf(
+                            Primary.copy(alpha = 0.15f),
+                            Color.Transparent
+                        ),
+                        center = Offset(0.5f, 0.3f),
+                        radius = 0.8f
+                    )
+                )
+        )
+        
         // Animated background grid
         Canvas(modifier = Modifier.fillMaxSize()) {
             val gridSpacing = 40f
@@ -241,19 +253,21 @@ fun SplashScreen(onSplashFinished: () -> Unit) {
         ) {
             Text(
                 text = "SatFinderPro",
-                fontSize = 42.sp,
-                fontWeight = FontWeight.Bold,
+                fontSize = 48.sp,
+                fontWeight = FontWeight.ExtraBold,
                 color = Color.White,
-                letterSpacing = 2.sp
+                letterSpacing = 3.sp,
+                style = MaterialTheme.typography.displaySmall
             )
             
             Spacer(modifier = Modifier.height(8.dp))
             
             Text(
-                text = "Professional Satellite Alignment System",
-                fontSize = 14.sp,
-                color = ScannerTextMuted,
-                letterSpacing = 1.sp,
+                text = "PROFESSIONAL SATELLITE ALIGNMENT",
+                fontSize = 13.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = Primary,
+                letterSpacing = 2.sp,
                 modifier = Modifier.alpha(textAlpha)
             )
             
@@ -267,8 +281,8 @@ fun SplashScreen(onSplashFinished: () -> Unit) {
                 CircularProgressIndicator(
                     modifier = Modifier.fillMaxSize(),
                     color = Primary,
-                    strokeWidth = 3.dp,
-                    trackColor = ScannerTextMuted.copy(alpha = 0.3f)
+                    strokeWidth = 4.dp,
+                    trackColor = Primary.copy(alpha = 0.2f)
                 )
             }
             
@@ -284,9 +298,11 @@ fun SplashScreen(onSplashFinished: () -> Unit) {
         
         // Version text
         Text(
-            text = "v2.0 PRO",
-            fontSize = 10.sp,
-            color = ScannerTextMuted.copy(alpha = 0.5f),
+            text = "v2.0 PREMIUM",
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Bold,
+            color = Primary.copy(alpha = 0.7f),
+            letterSpacing = 1.5.sp,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(bottom = 24.dp)

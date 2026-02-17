@@ -17,6 +17,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -57,27 +58,41 @@ fun LoginScreen(
             .fillMaxSize()
             .background(
                 Brush.verticalGradient(
-                    colors = listOf(
-                        DarkScannerBackground,
-                        DarkScannerSurface,
-                        DarkScannerBackground
-                    )
+                    colors = BackgroundGradient
                 )
             )
     ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    Brush.radialGradient(
+                        colors = listOf(
+                            Primary.copy(alpha = 0.1f),
+                            Color.Transparent
+                        ),
+                        center = Offset(0.5f, 0.3f),
+                        radius = 1.2f
+                    )
+                )
+        )
         // Animated background elements
         Box(
             modifier = Modifier
-                .size(300.dp)
-                .offset(x = (-50).dp, y = (-50).dp)
+                .size(350.dp)
+                .offset(x = (-80).dp, y = (-80).dp)
                 .clip(CircleShape)
-                .background(Primary.copy(alpha = 0.1f))
+                .background(
+                    Brush.radialGradient(
+                        colors = PrimaryGradient.map { it.copy(alpha = 0.15f) }
+                    )
+                )
                 .align(Alignment.TopStart)
         )
         
         Box(
             modifier = Modifier
-                .size(200.dp)
+                .size(250.dp)
                 .offset(x = (50).dp, y = (100).dp)
                 .clip(CircleShape)
                 .background(Secondary.copy(alpha = 0.1f))
@@ -115,17 +130,20 @@ fun LoginScreen(
             
             Text(
                 text = "SatFinderPro",
-                fontSize = 32.sp,
-                fontWeight = FontWeight.Bold,
+                fontSize = 38.sp,
+                fontWeight = FontWeight.ExtraBold,
                 color = Color.White,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                letterSpacing = 1.5.sp
             )
             
             Text(
-                text = "Professional Satellite Alignment",
-                fontSize = 14.sp,
-                color = ScannerTextMuted,
-                textAlign = TextAlign.Center
+                text = "PROFESSIONAL SATELLITE ALIGNMENT",
+                fontSize = 12.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = Primary,
+                textAlign = TextAlign.Center,
+                letterSpacing = 2.sp
             )
             
             Spacer(modifier = Modifier.height(40.dp))
@@ -142,16 +160,18 @@ fun LoginScreen(
                 ) {
                     Text(
                         text = "Welcome Back",
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White
+                        fontSize = 28.sp,
+                        fontWeight = FontWeight.ExtraBold,
+                        color = Color.White,
+                        letterSpacing = 0.5.sp
                     )
                     
                     Text(
-                        text = "Sign in to continue",
+                        text = "Sign in to continue your journey",
                         fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium,
                         color = ScannerTextMuted,
-                        modifier = Modifier.padding(top = 4.dp, bottom = 24.dp)
+                        modifier = Modifier.padding(top = 6.dp, bottom = 28.dp)
                     )
                     
                     // Email Field
@@ -288,43 +308,59 @@ fun LoginScreen(
                     Spacer(modifier = Modifier.height(16.dp))
                     
                     // Login Button
-                    Button(
-                        onClick = {
-                            var isValid = true
-                            if (email.isEmpty() || !email.contains("@")) {
-                                emailError = "Please enter a valid email"
-                                isValid = false
-                            }
-                            if (password.length < 6) {
-                                passwordError = "Password must be at least 6 characters"
-                                isValid = false
-                            }
-                            if (isValid) {
-                                viewModel.login(email, password)
-                            }
-                        },
+                    Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(52.dp),
-                        enabled = authState !is AuthState.Loading,
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Primary,
-                            disabledContainerColor = Primary.copy(alpha = 0.5f)
-                        ),
-                        shape = RoundedCornerShape(12.dp)
+                            .height(56.dp)
+                            .clip(RoundedCornerShape(14.dp))
+                            .background(
+                                Brush.horizontalGradient(
+                                    colors = PrimaryGradient
+                                )
+                            )
                     ) {
-                        if (authState is AuthState.Loading) {
-                            CircularProgressIndicator(
-                                modifier = Modifier.size(24.dp),
-                                color = Color.White,
-                                strokeWidth = 2.dp
+                        Button(
+                            onClick = {
+                                var isValid = true
+                                if (email.isEmpty() || !email.contains("@")) {
+                                    emailError = "Please enter a valid email"
+                                    isValid = false
+                                }
+                                if (password.length < 6) {
+                                    passwordError = "Password must be at least 6 characters"
+                                    isValid = false
+                                }
+                                if (isValid) {
+                                    viewModel.login(email, password)
+                                }
+                            },
+                            modifier = Modifier.fillMaxSize(),
+                            enabled = authState !is AuthState.Loading,
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Transparent,
+                                disabledContainerColor = Color.Transparent
+                            ),
+                            shape = RoundedCornerShape(14.dp),
+                            elevation = ButtonDefaults.buttonElevation(
+                                defaultElevation = 0.dp,
+                                pressedElevation = 0.dp,
+                                disabledElevation = 0.dp
                             )
-                        } else {
-                            Text(
-                                text = "SIGN IN",
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Bold
-                            )
+                        ) {
+                            if (authState is AuthState.Loading) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(26.dp),
+                                    color = Color.White,
+                                    strokeWidth = 3.dp
+                                )
+                            } else {
+                                Text(
+                                    text = "SIGN IN",
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight.ExtraBold,
+                                    letterSpacing = 1.5.sp
+                                )
+                            }
                         }
                     }
                 }

@@ -239,25 +239,44 @@ fun MainScreen(
                     visible = isAligned,
                     enter = fadeIn() + expandVertically()
                 ) {
-                    Button(
-                        onClick = { viewModel.saveAlignment() },
+                    Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(56.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = Success),
-                        shape = RoundedCornerShape(12.dp)
+                            .height(60.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                            .background(
+                                Brush.horizontalGradient(
+                                    colors = SuccessGradient
+                                )
+                            )
                     ) {
-                        Icon(
-                            imageVector = Icons.Default.CheckCircle,
-                            contentDescription = "Save",
-                            modifier = Modifier.size(24.dp)
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(
-                            text = "SAVE ALIGNMENT",
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
-                        )
+                        Button(
+                            onClick = { viewModel.saveAlignment() },
+                            modifier = Modifier.fillMaxSize(),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Transparent
+                            ),
+                            shape = RoundedCornerShape(16.dp),
+                            elevation = ButtonDefaults.buttonElevation(
+                                defaultElevation = 0.dp,
+                                pressedElevation = 0.dp
+                            )
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.CheckCircle,
+                                contentDescription = "Save",
+                                modifier = Modifier.size(26.dp),
+                                tint = Color.White
+                            )
+                            Spacer(modifier = Modifier.width(12.dp))
+                            Text(
+                                text = "SAVE ALIGNMENT",
+                                fontSize = 17.sp,
+                                fontWeight = FontWeight.ExtraBold,
+                                letterSpacing = 1.5.sp,
+                                color = Color.White
+                            )
+                        }
                     }
                 }
 
@@ -266,20 +285,27 @@ fun MainScreen(
                         onClick = { },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(56.dp),
+                            .height(60.dp),
                         enabled = false,
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(16.dp),
+                        border = androidx.compose.foundation.BorderStroke(
+                            2.dp,
+                            ScannerTextMuted.copy(alpha = 0.3f)
+                        )
                     ) {
                         Icon(
                             imageVector = Icons.Default.AddCircle,
                             contentDescription = "Align",
-                            modifier = Modifier.size(24.dp)
+                            modifier = Modifier.size(26.dp),
+                            tint = ScannerTextMuted
                         )
-                        Spacer(modifier = Modifier.width(8.dp))
+                        Spacer(modifier = Modifier.width(12.dp))
                         Text(
                             text = "ALIGN TO SAVE",
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
+                            fontSize = 17.sp,
+                            fontWeight = FontWeight.ExtraBold,
+                            letterSpacing = 1.5.sp,
+                            color = ScannerTextMuted
                         )
                     }
                 }

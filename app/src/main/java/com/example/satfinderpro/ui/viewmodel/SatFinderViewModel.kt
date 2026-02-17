@@ -53,9 +53,26 @@ class SatFinderViewModel(private val alignmentRepository: AlignmentRepository) :
 
     private fun initializeSatellites() {
         _satellites.value = listOf(
-            Satellite("Nilesat", -7.0),
-            Satellite("Astra", 19.2),
-            Satellite("Eutelsat", 7.0)
+            Satellite("Nilesat 201", -7.0),
+            Satellite("Eutelsat 7E", 7.0),
+            Satellite("Hotbird 13E", 13.0),
+            Satellite("Astra 19.2E", 19.2),
+            Satellite("Badr 26E", 26.0),
+            Satellite("Astra 28.2E", 28.2),
+            Satellite("Arabsat 30.5E", 30.5),
+            Satellite("Eutelsat 36E", 36.0),
+            Satellite("Türksat 42E", 42.0),
+            Satellite("Intelsat 68.5E", 68.5),
+            Satellite("Thaicom 78.5E", 78.5),
+            Satellite("Insat 83E", 83.0),
+            Satellite("Asiasat 100.5E", 100.5),
+            Satellite("Vinasat 132E", 132.0),
+            Satellite("Optus 152E", 152.0),
+            Satellite("Galaxy 19", -97.0),
+            Satellite("SES-1", -101.0),
+            Satellite("DirectTV 7S", -119.0),
+            Satellite("Star One C2", -70.0),
+            Satellite("Telstar 14R", -63.0)
         )
     }
 
